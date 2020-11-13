@@ -10,8 +10,12 @@ const forecast = (latitude, longitude, callback) => {
             callback("Unable To Find Location",undefined)
         else{
             const data = body;
-            const forecastStr = "It is "
-            +data.current.temperature+ "°C. Overcast : " +data.current.weather_descriptions[0]
+            let type = "";
+            if (data.current.is_day ==="yes") type="day"; else type="night"
+            const forecastStr = "It is currently "
+            +data.current.temperature+ "°C in "+
+            data.location.name+".\nIt's "+type
+            + " and the forecast is : " +data.current.weather_descriptions[0]
         
             callback(undefined,forecastStr)
         }
